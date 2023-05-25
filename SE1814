@@ -1,0 +1,49 @@
+#!binbash
+
+while true; do
+    echo Menu
+    echo a. Display the present working directory
+    echo b. List names of the files in a given directory
+    echo c. Display today's date and time
+    echo d. Display whether a file is an ordinary file or a directory
+    echo e. Execute a command line
+    echo f. Exit the program
+
+    read -p Enter your choice (a-f)  choice
+
+    case $choice in
+        a)
+            pwd
+            ;;
+        b)
+            read -p Enter the directory path  directory
+            ls $directory
+            ;;
+        c)
+            date
+            ;;
+        d)
+            read -p Enter the file or directory path  path
+            if [ -f $path ]; then
+                echo $path is an ordinary file.
+            elif [ -d $path ]; then
+                echo $path is a directory.
+            else
+                echo $path does not exist or is not a valid file or directory.
+            fi
+            ;;
+        e)
+            read -p Enter the command to execute  command
+            eval $command
+            ;;
+        f)
+            echo Exiting the program.
+            exit 0
+            ;;
+        )
+            echo Invalid choice. Please enter a valid option (a-f).
+            ;;
+    esac
+
+    echo
+done
